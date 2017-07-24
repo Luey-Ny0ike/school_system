@@ -24,3 +24,10 @@ post '/student/new' do
                  clubs: @student_clubs)
   redirect '/students'
 end
+
+get '/students/:id' do
+  @student_details = Student.find(params.fetch('id').to_i)
+  @students = Student.all
+  erb :student_detail
+end
+
