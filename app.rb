@@ -1,10 +1,10 @@
 require('bundler/setup')
- Bundler.require(:default)
+Bundler.require(:default)
 
- Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get('/') do
-    erb(:index)
+  erb(:home)
 end
 
 get '/students' do
