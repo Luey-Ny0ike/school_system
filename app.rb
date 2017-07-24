@@ -6,3 +6,8 @@ require('bundler/setup')
 get('/') do
     erb(:index)
 end
+
+get '/students' do
+  @students = Student.all
+  erb :students
+end
