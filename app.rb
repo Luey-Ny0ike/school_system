@@ -11,3 +11,16 @@ get '/students' do
   @students = Student.all
   erb :students
 end
+
+post '/student/new' do
+  @student_name = params.fetch('name')
+  @student_level = params.fetch('level')
+  @student_stream = params.fetch('stream')
+  @student_fee = params.fetch('fee')
+  @student_dormitory = params.fetch('dormitory')
+  @student_clubs = params.fetch('clubs')
+  Student.create(name: @student_name, level: @student_level,
+                 stream: @student_stream, fee: @student_fee, dormitory: @student_dormitory,
+                 clubs: @student_clubs)
+  redirect '/students'
+end
