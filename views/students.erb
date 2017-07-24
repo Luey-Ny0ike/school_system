@@ -3,12 +3,11 @@
 <% if @students.any?()%>
 <ol>
   <% @students.each do |student|%>
-    <a href="/student/<%= student.id%>">
-    <li><%= student.id%></li>
+    <a href="/students/<%= student.id%>">
     <li><%= student.name%></li>
     </a>
 </ol>
-
+<% end %>
 <% else %>
  <p>No students in this school yet</p>
  <% end %>
