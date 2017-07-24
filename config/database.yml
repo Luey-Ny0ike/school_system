@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: school_system_development
+
+test:
+  adapter: postgresql
+  database: school_system_test
