@@ -1,0 +1,84 @@
+<h1>Update <%=@parent.name()%> Details</h1>
+
+ <form action="/parents/<%= @parent.id() %>" method="post">
+   <input type="hidden" name="_method" value="patch">
+
+   <!-- <% if @distributor.address().==("\n, ") %>
+   <div class="form-group">
+     <label for="city">Address:</label>
+     <textarea rows='3' name="address"></textarea>
+   </div>
+   <% else %>
+   <div class="form-group">
+     <label for="address">Address:</label>
+     <textarea rows='3' name="address"><%= @distributor.address() %></textarea>
+   </div>
+   <% end %> -->
+
+   <div class="form-group">
+     <label for="name">Parent Name</label>
+     <input type="name" name="name" value="<%= @parent.name() %>">
+   </div>
+   <div class="form-group">
+     <label for="phone">Telphone no:</label>
+     <input type="phone" name="phone" value="<%= @parent.phone() %>">
+   </div>
+
+   <div class="form-group">
+     <label for="email">Email Address:</label>
+     <input type="email" name="email" value="<%= @parent.email() %>">
+   </div>
+
+   <div class="form-group">
+     <label for="username">Username:</label>
+     <input type="text" name="username" value="<%= @parent.username() %>">
+   </div>
+
+
+   <label>Current Students:</label>
+  <% if @parent.students.any? %>
+  <ul>
+    <% @parent.students.each() do |student| %>
+    <li><%= student.name() %></li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p>No students belonging to this parent.</p>
+  <br>
+  <% end %>
+
+  <div class="form-group">
+    <% if @students.any?() %>
+    <label>Add new students to<%= @parent.name() %>:</label>
+    <% @parents.each() do |student| %>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="student_ids[]" value="<%= student.id() %>"><%= student.name() %>
+      </label>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+     <% if @parent.students().any?() %>
+     <label>Delete students from <%= @parent.name() %></label>
+     <% @parent.students().each() do |student| %>
+     <div class="checkbox">
+       <label>
+         <input type="checkbox" name="remove_student_ids[]" value="<%= student.id()%>"><%= student.name()%>
+       </label>
+     </div>
+     <% end %>
+     <% else %>
+     <p>There are no more students for <%= @parent.name() %>
+     <% end %>
+
+   <button type="submit" class="btn">Update</button>
+ </form>
+
+ <form action="/parents/<%= @parent.id() %>" method="post">
+   <input type="hidden" name="_method" value="delete">
+   <button type="submit" class="btn">Delete  <%= @parent.name() %> from Database</button>
+ </form>
+
+</div>
