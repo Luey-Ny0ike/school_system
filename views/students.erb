@@ -12,3 +12,24 @@
 <% else %>
  <p>No students in this school yet</p>
  <% end %>
+
+ <h3>Add student</h3>
+ <div class="row">
+ <div class="col-md-7">
+ <form action="/student/new" method="post">
+     <label>student Name:</label>
+     <input type="text" name="name"class="form-control">
+     <label>level:</label>
+     <input type="text" name="level"class="form-control">
+     <label>stream:</label>
+     <input type="text" name="stream"class="form-control">
+     <label>fee:</label>
+     <input type="text" name="fee"class="form-control">
+     <label>dormitory:</label>
+     <input type="text" name="dormitory"class="form-control">
+     <label> clubs:</label>
+     <input type="text" name="clubs"class="form-control">
+     <button type="submit">Save student</button>
+ </form>
+</div>
+</div>
