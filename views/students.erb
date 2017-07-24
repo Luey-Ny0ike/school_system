@@ -1,0 +1,14 @@
+<h3>All students</h3>
+
+<% if @students.any?()%>
+<ol>
+  <% @students.each do |student|%>
+    <a href="/student/<%= student.id%>">
+    <li><%= student.id%></li>
+    <li><%= student.name%></li>
+    </a>
+</ol>
+
+<% else %>
+ <p>No students in this school yet</p>
+ <% end %>
