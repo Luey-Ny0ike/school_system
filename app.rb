@@ -31,3 +31,8 @@ get '/students/:id' do
   erb :student_detail
 end
 
+delete '/students/:id' do
+  @student_details = Student.find(params.fetch('id').to_i)
+  @student_details.destroy
+  redirect '/students'
+end
