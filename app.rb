@@ -53,7 +53,7 @@ get('/parents/new') do
 end
 
 post('/parents') do
-  name = params.fetch(:name)
+  name = params.fetch(:parent_name)
   phone = params[:phone]
   email = params[:email]
   username = params[:username]
