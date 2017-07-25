@@ -19,9 +19,6 @@ post '/student/new' do
   @student_fee = params.fetch('fee')
   @student_dormitory = params.fetch('dormitory')
   @student_clubs = params.fetch('clubs')
-  Student.create(name: @student_name, level: @student_level,
-                 stream: @student_stream, fee: @student_fee, dormitory: @student_dormitory,
-                 clubs: @student_clubs)
   @new_student = Student.create(name: @student_name, level: @student_level,
                                 stream: @student_stream, fee: @student_fee, dormitory: @student_dormitory,
                                 clubs: @student_clubs)
