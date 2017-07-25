@@ -1,5 +1,6 @@
-class Parent <ActiveRecord::Base
-  has_and_belongs_to_many(:students)
+class Parent < ActiveRecord::Base
+  has_many :associations
+  has_many :parents, through: :associations
   validates(:name, :username, :password, :presence => true)
   validates(:phone, :length => { :maximum => 21})
   before_save(:titlecase_name)
