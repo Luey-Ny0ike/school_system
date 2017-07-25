@@ -1,0 +1,14 @@
+<h1>Parents</h1>
+ <% if @parents == [] %>
+ <p>There are no parents saved in the database. </p>
+ <% else %>
+ <ul>
+   <% @parents.each() do |parent| %>
+   <li><a href='/parents/<%= parent.id() %>'><%= parent.name() %></a></li>
+   <% end %>
+ </ul>
+ <% end %>
+ <ul>
+   <li><a href='/parents/new'>Add a New Parent</a></li>
+   <li><a href='/'>Home</a></li>
+ </ul>

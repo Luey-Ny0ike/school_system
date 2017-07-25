@@ -1,0 +1,31 @@
+<h1><%= @parent.name() %></h1>
+ <ul>
+
+   <li>Telephone: <%= @parent.phone() %></li>
+ </ul>
+
+   <li>Telephone:
+     <% if @parent.phone().!=('') %>
+     <%= @parent.phone() %>
+     <% else %>
+     no Tel no for this parent number given
+     <% end %>
+   </li>
+ <ul>
+
+   <% if @parent.students.any? %>
+   <h3>Students Available for <%= @parent.name() %>:</h3>
+   <ul>
+     <% @parent.students.each() do |student| %>
+     <li><%= student.name() %></li>
+     <% end %>
+   </ul>
+   <% else %>
+   <p>No student belonging to this parent</p>
+   <br>
+   <% end %>
+
+<button class="btn"<a href='/parents/<%= @parent.id() %>/edit'>Update Parent Details</a></button>
+   <li><a href='/parents'>Back to Parents</a></li>
+   <li><a href='/parents/new'>Add a New Parent</a></li>
+ </ul>
