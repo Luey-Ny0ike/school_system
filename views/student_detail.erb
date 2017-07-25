@@ -18,3 +18,20 @@
 <br>
 <br>
 <button type="submit" name="button" class="btn-danger">Delete student</button>
+
+<h3><%= @student_details.name%>'s Parents/gurdians</h3>
+
+<% if @parent_details.any?%>
+<% @parent_details.each do |parent|%>
+<%= parent.name%>
+<br>
+<%= parent.phone%>
+<br>
+<%= parent.email%>
+<br>
+<%= parent.username%>
+<br>
+<%end%>
+<%else%>
+<p>No parent</p>
+<%end%>

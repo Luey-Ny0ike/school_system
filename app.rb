@@ -19,15 +19,24 @@ post '/student/new' do
   @student_fee = params.fetch('fee')
   @student_dormitory = params.fetch('dormitory')
   @student_clubs = params.fetch('clubs')
-  Student.create(name: @student_name, level: @student_level,
-                 stream: @student_stream, fee: @student_fee, dormitory: @student_dormitory,
-                 clubs: @student_clubs)
+  @new_student = Student.create(name: @student_name, level: @student_level,
+                                stream: @student_stream, fee: @student_fee, dormitory: @student_dormitory,
+                                clubs: @student_clubs)
+
+  name = params.fetch(:parent_name)
+  phone = params[:phone]
+  email = params[:email]
+  username = params[:username]
+  password = params[:password]
+  @new_parent = Parent.create(name: name, phone: phone, email: email, username: username, password: password)
+  Association.create(student_id: @new_student.id, parent_id: @new_parent.id)
   redirect '/students'
 end
 
 get '/students/:id' do
   @student_details = Student.find(params.fetch('id').to_i)
   @students = Student.all
+  @parent_details = Parent.joins(:associations).where(associations: {student_id: @student_details.id})
   erb :student_detail
 end
 
@@ -43,7 +52,7 @@ get('/parents/new') do
 end
 
 post('/parents') do
-  name = params.fetch(:name)
+  name = params.fetch(:parent_name)
   phone = params[:phone]
   email = params[:email]
   username = params[:username]
