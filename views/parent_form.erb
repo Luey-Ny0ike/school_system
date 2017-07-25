@@ -22,14 +22,30 @@
      <label for="password">Password:</label>
      <input type="password" name="password" id="password">
    </div>
+
+   <div class="form-group">
+    <label for="student_ids[]">Select students for this Parent:</label>
+    <% if @students.any?() %>
+      <% @students.each() do |student| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="student_ids[]" value="<%= student.id()%>"><%= student.name()%>
+        </label>
+      </div>
+      <% end %>
+    <%else%>
+    <p>Add a new student to this parent.</p>
+    <% end %>
+  </div>
+
   <button type="submit" class="btn">Add Parent</button>
  </form>
 
- <!-- <h3>Add students to this parent? </h3>
+ <h3>Add students to this parent? </h3>
   <form action="/students" method="post">
     <div class="form-group">
       <label for="name">Student Name:</label>
       <input type="text" name="name">
     </div>
     <button type="submit" class="btn">Add Student</button>
-  </form> -->
+  </form>

@@ -38,6 +38,7 @@ delete '/students/:id' do
 end
 
 get('/parents/new') do
+  @students = Student.all
   erb(:parent_form)
 end
 
@@ -47,7 +48,8 @@ post('/parents') do
   email = params[:email]
   username = params[:username]
   password = params[:password]
-  @parent = Parent.create(name: name, phone: phone, email: email, username: username, password: password)
+  student_ids = params[:student_ids]
+  @parent = Parent.create(name: name, phone: phone, email: email, username: username, password: password, :student_ids => student_ids)
   if @parent.save
     redirect('/parents/'.concat(@parent.id.to_s))
   else
@@ -67,7 +69,7 @@ end
 
 get('/parents/:id/edit') do
   @parent = Parent.find(params.fetch('id').to_i)
-
+  @students =Student.all() -@parent.students()
   erb(:parent_edit)
 end
 
@@ -96,7 +98,7 @@ patch('/parents/:id') do
     end
   end
 
-  @parent.update(ame: name, phone: phone, email: email, username: username, brand_ids: all_brand_ids)
+  @parent.update(ame: name, phone: phone, email: email, username: username, student_ids: all_student_ids)
   if @parent.save
     redirect('/parents/'.concat(@parent.id.to_s))
   else
