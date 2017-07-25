@@ -39,6 +39,7 @@ end
 get '/students/:id' do
   @student_details = Student.find(params.fetch('id').to_i)
   @students = Student.all
+  @parent_details = Parent.joins(:associations).where(associations: {student_id: @student_details.id})
   erb :student_detail
 end
 
