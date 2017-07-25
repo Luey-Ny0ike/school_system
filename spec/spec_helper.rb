@@ -14,10 +14,10 @@ require('./app')
 
 RSpec.configure do |config|
   config.after(:each) do
-    Parent.all().each() do |distributor|
+    Parent.all().each() do |parent|
       distributor.destroy()
     end
-    Student.all().each() do |brand|
+    Student.all().each() do |student|
       brand.destroy()
     end
   end
