@@ -49,24 +49,26 @@ end
 
 get('/parents/new') do
   @students = Student.all
-  erb(:parent_form)
+  erb (:student_detail)
 end
 
 post('/parents') do
-  name = params.fetch(:parent_name)
-  phone = params[:phone]
-  email = params[:email]
-  username = params[:username]
-  password = params[:password]
-  student_ids = params[:student_ids]
-  @new_parent = Parent.create(name: name, phone: phone, email: email, username: username, password: password, :student_ids => student_ids)
-  Association.create(student_id: @new_student.id, parent_id: @new_parent.id)
-  if @parent.save
-    redirect('/parents/'.concat(@parent.id.to_s))
+  name = params.fetch('parent_name')
+  phone = params.fetch('phone')
+  email = params.fetch('email')
+  username = params.fetch('username')
+  password = params.fetch('password')
+  student_id = params.fetch('id').to_i
+  @student = Student.find(student_id)
+  @new_parent = Parent.create(name: name, phone: phone, email: email, username: username, password: password, :student_ids => student_id)
+  Association.create(student_id: @student.id, parent_id: @new_parent.id)
+  if @new_parent.save
+    redirect('/parents/'.concat(@new_parent.id.to_s))
   else
     erb(:parent_errors)
   end
 end
+
 
 get('/parents/:id') do
   @parent = Parent.find(params.fetch('id').to_i)
@@ -123,10 +125,14 @@ delete('/parents/:id') do
   redirect('/parents')
 end
 
-#new assignment
-get '/admin/assignment' do
-  erb :new_assignment
-end
+ get ('/students/find/') do
+   name = params.fetch('name')
+   if @studento=Student.find_by_name(name)
+     erb(:home)
+   else
+     erb(:parent_errors)
+   end
+ end
 
 post '/admin/assignment/new' do
    level=params.fetch('level').to_i
@@ -134,7 +140,7 @@ post '/admin/assignment/new' do
    subject=params.fetch('subject')
    content=params.fetch('content')
    due_date=params.fetch('due_date')
-   Assignment.create(level: level,stream: stream, subject: subject, due_date: due_date)
+   Assignment.create(level: level, stream: stream, subject: subject, due_date: due_date)
    redirect 'admin/assignment'
 end
 
