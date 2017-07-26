@@ -3,38 +3,38 @@
 
 <form action="/students/find" method="post">
 
-    <label for="level">Level:</label>
-    <input id="level" name="level" type="text">
+  <label>Level of Study:</label>
+  <select id="level" name="level">
+      <option value="1">Form 1</option>
+      <option value="2">Form 2</option>
+      <option value="3">Form 3</option>
+      <option value="4">Form 4</option>
+  </select> <br>
+<br>
 
     <label for="stream">Stream:</label>
     <input id="stream" name="stream" type="text">
 
     <button type="submit">Search</button>
-
-<br>
-<br>
 </form>
-<form>
 
-
-
-  <label for="student_ids[]">Select a Student</label>
-  <select id='student_id' name='student_id' type='text'>
-    <% @students.each() do |student| %>
-      <option value="<%= student.id()%>"> <%= student.name() %> </option>
-    <% end %>
-
-      <button type="submit">Select Student</button>
-  </select>
-
-  </form>
 
 <h2>Add a New Guardian</h2>
+
  <form action="/parents" method="post">
+
+   <label for="student_ids[]">Select a Student</label>
+   <select id='student_id' name='student_id' type='text'>
+     <% @students.each() do |student| %>
+  <option value="<%= student.id()%>"> <%= student.name() %> </option>
+     <% end %>
+
+       <button type="submit">Select Student</button>
+   </select>
 
    <div class="form-group">
      <label for="name">Parent Name:</label>
-     <input type="text" name="phone_name" id="name" class="form-control">
+     <input type="text" name="parent_name" id="parent_name" class="form-control">
    </div>
 
    <div class="form-group">

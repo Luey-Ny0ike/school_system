@@ -59,7 +59,8 @@ post('/parents') do
   username = params[:username]
   password = params[:password]
   student_ids = params[:student_ids]
-  @parent = Parent.create(name: name, phone: phone, email: email, username: username, password: password, :student_ids => student_ids)
+  @new_parent = Parent.create(name: name, phone: phone, email: email, username: username, password: password, :student_ids => student_ids)
+  Association.create(student_id: @new_student.id, parent_id: @new_parent.id)
   if @parent.save
     redirect('/parents/'.concat(@parent.id.to_s))
   else
@@ -122,7 +123,7 @@ delete('/parents/:id') do
   redirect('/parents')
 end
 
-#new assignment 
+#new assignment
 get '/admin/assignment' do
   erb :new_assignment
 end
