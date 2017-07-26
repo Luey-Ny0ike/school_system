@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725072512) do
+ActiveRecord::Schema.define(version: 20170725154014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,15 +42,6 @@ ActiveRecord::Schema.define(version: 20170725072512) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "studentassignments", force: :cascade do |t|
-    t.integer "student_id"
-    t.integer "assignment_id"
-    t.boolean "editing"
-    t.boolean "revision"
-    t.boolean "approved"
-    t.boolean "rejected"
-  end
-
   create_table "students", force: :cascade do |t|
     t.string "name"
     t.integer "level"
@@ -61,6 +52,18 @@ ActiveRecord::Schema.define(version: 20170725072512) do
     t.string "events"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "assignment_id"
+    t.boolean "editing"
+    t.boolean "revision"
+    t.boolean "approved"
+    t.boolean "rejected"
+    t.binary "file"
+    t.string "content"
+    t.boolean "under_review"
   end
 
 end

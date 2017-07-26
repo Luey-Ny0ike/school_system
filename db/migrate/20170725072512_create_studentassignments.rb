@@ -1,6 +1,6 @@
 class CreateStudentassignments < ActiveRecord::Migration[5.1]
   def change
-    create_table(:studentassignments) do | table|
+    create_table(:tracks) do | table|
         table.column(:student_id, :int)
         table.column(:assignment_id, :int)
         table.column(:editing, :boolean)
