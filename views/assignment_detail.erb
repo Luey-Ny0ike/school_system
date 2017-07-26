@@ -1,0 +1,15 @@
+<a href="/">Home</a>
+<h2>Assignment</h2>
+<br>
+<%= @assignment.subject%><br>
+<%= @assignment.content%>
+
+<hr>
+<h4>Submit Assignment</h4>
+<form action="/students/<%= @student.id%>/assignment/<%= @assignment.id%>" method="post">
+    <label>Upload a File:</label><br>
+    <input type="file" name="file"><br>
+    <label>Explanation:</label><br>
+    <textarea type="text" name="content"></textarea><br>
+    <button type="submit">Submit Assignment</button>
+</form>

@@ -1,0 +1,20 @@
+<h3>New Assignment</h3>
+
+<form action="/admin/assignment/new" method="post">
+    <label>Level of Study:</label><br>
+    <select id="level" name="level">
+        <option value="1">Form 1</option>
+        <option value="2">Form 2</option>
+        <option value="3">Form 3</option>
+        <option value="4">Form 4</option>
+    </select> <br>
+    <label>Stream:</label><br>
+    <input type="text" name="stream"><br>
+    <label>Subject: </label><br>
+    <input type="text" name="subject"><br>
+    <label>Assignment Details: </label><br>
+    <textarea type="text" name="content" cols="50" rows="10"></textarea><br>
+    <label>Due Date</label><br>
+    <input type="datetime-local" name="due_date"><br> 
+    <button type="submit">New Assignment</button>
+</form>

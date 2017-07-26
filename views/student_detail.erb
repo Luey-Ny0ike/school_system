@@ -17,6 +17,19 @@
 <%= @student_details.clubs%>
 <br>
 <br>
+
+<h3>Assignments</h3>
+<hr>
+<!-- <button type="button">Check Assignments</button><br> -->
+<%if @assignments.any?%>
+    <ul>
+        <% @assignments.each do |assignment|%>
+            <a href="/students/<%= @student_details.id%>/assignment/<%= assignment.id%>"><%= assignment.subject%>|<%= assignment.content%></a>
+        <%end%>
+    </ul>
+<%else%>
+    <p>No assignments for your class at the moment</p>
+<%end%>
 <button type="submit" name="button" class="btn-danger">Delete student</button>
 
 <h3><%= @student_details.name%>'s Parents/gurdians</h3>
