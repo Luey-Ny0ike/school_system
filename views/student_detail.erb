@@ -31,10 +31,41 @@
     <p>No assignments for your class at the moment</p>
 <%end%>
 
+<h3>Grades</h3>
+<hr>
 <% if @perfomances.any?%>
  <ul>
    <% @perfomances.each do |perfomance|%>
-    <li><%= perfomance.cat1%></li>
+   <h3><%= @student_details.name%>'s perfomance</h3>
+   <div class="table-responsive">
+<table class="table">
+ <thead>
+   <tr>
+     <th>Subject</th>
+     <th>Cat 1</th>
+     <th>cat 2</th>
+     <th>Cat 3</th>
+     <th>Total(%)</th>
+     <th>Grade</th>
+     <th>Position in subject</th>
+     <th>Teacher's comments</th>
+   </tr>
+ </thead>
+ <tbody>
+   <tr>
+     <td><%= perfomance.subject_name%></td>
+     <td><%= perfomance.cat1%></td>
+     <td><%= perfomance.cat2%></td>
+     <td><%= perfomance.cat3%></td>
+     <td><%= perfomance.total%></td>
+     <td><%= perfomance.grade%></td>
+     <td><%= perfomance.position%></td>
+     <td><%= perfomance.comments%></td>
+   </tr>
+ </tbody>
+</table>
+</div>
+</div>
     <% end %>
  </ul>
   <% else %>
