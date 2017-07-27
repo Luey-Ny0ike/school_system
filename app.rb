@@ -44,7 +44,8 @@ get '/students/:id' do
   @student_details = Student.find(params.fetch('id').to_i)
   @students = Student.all
   @parent_details = Parent.joins(:associations).where(associations: { student_id: @student_details.id })
-  @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
+  @assignments=Assignment.joins(:tracks).where(tracks:{student_id: params.fetch('id').to_i})
+  # @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
   erb :student_detail
 end
 
