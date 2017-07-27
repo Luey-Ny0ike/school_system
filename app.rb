@@ -63,6 +63,17 @@ get '/student/:id' do
   erb :student_detail
 end
 
+get '/admin/student/:id' do
+  @student_details = Student.find(params.fetch('id').to_i)
+  @students = Student.all
+  @grades = Grade.all
+  @parent_details = Parent.joins(:associations).where(associations: { student_id: @student_details.id })
+  @assignments=Assignment.joins(:tracks).where(tracks:{student_id: params.fetch('id').to_i})
+  # @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
+    @perfomances = Grade.joins(:perfomances).where(perfomances:{student_id: params.fetch('id').to_i})
+  erb :admin_student_detail
+end
+
 delete '/student/:id' do
   @student_details = Student.find(params.fetch('id').to_i)
   @student_details.destroy
@@ -85,7 +96,7 @@ post('/parents') do
   @new_parent = Parent.create(name: name, phone: phone, email: email, username: username, password: password, student_ids: student_id)
   if Association.create(student_id: @student.id, parent_id: @new_parent.id)
 
-    redirect('/parents/'.concat(@new_parent.id.to_s))
+    redirect('/parent/'.concat(@new_parent.id.to_s))
   else
     erb(:parent_errors)
   end
@@ -135,7 +146,7 @@ patch('/parents/:id') do
 
   @parent.update(ame: name, phone: phone, email: email, username: username, student_ids: all_student_ids)
   if @parent.save
-    redirect('/parents/'.concat(@parent.id.to_s))
+    redirect('/parent/'.concat(@parent.id.to_s))
   else
     erb(:parent_errors)
   end
