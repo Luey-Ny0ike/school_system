@@ -3,6 +3,16 @@
 <div class="row">
   <div class="col-md-7">
     <form class="" action="/admin/grade/new" method="post">
+    <!-- select student options -->
+    <input type="hidden" name="student_id" >
+  <label>Select student to assign grade</label>
+  <select class="form-control" id="student" name="student">
+    <% @allstudents.each do |students|%>
+    <option value="<%= students.id%>"><%= students.name%></option>
+    <%end%>
+  </select>
+
+    <!-- select subject options -->
       <input type="hidden" name="subject_id" >
     <label>Select subject to assign grade</label>
     <select class="form-control" id="select" name="select">
@@ -10,6 +20,7 @@
       <option value="<%= subject.id%>"><%= subject.name%></option>
       <%end%>
     </select>
+
       <label for="cat1">Cat 1</label>
       <input type="text" name="cat1" class="form-control">
       <label for="cat2">Cat 2</label>
