@@ -41,9 +41,9 @@ get '/students/:id' do
   @student_details = Student.find(params.fetch('id').to_i)
   @students = Student.all
   @grades = Grade.all
-  @parent_details = Parent.joins(:associations).where(associations: {student_id: @student_details.id})
-  @assignments=Assignment.student_assignment(@student_details.level.to_i,@student_details.stream)
-  @grades=Grade.student_grade(@student_details.id.to_i, @grades.id.to_i)
+  @parent_details = Parent.joins(:associations).where(associations: { student_id: @student_details.id })
+  @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
+  @grades = Grade.student_grade(@student_details.id.to_i, @grades.id.to_i)
   erb :student_detail
 end
 
@@ -126,32 +126,32 @@ delete('/parents/:id') do
   redirect('/parents')
 end
 
-#new assignment
+# new assignment
 get '/admin/assignment' do
   erb :new_assignment
 end
 
 post '/admin/assignment/new' do
-   level=params.fetch('level').to_i
-   stream=params.fetch('stream')
-   subject=params.fetch('subject')
-   content=params.fetch('content')
-   due_date=params.fetch('due_date')
-   Assignment.create(level: level,stream: stream, subject: subject, due_date: due_date)
-   redirect 'admin/assignment'
+  level = params.fetch('level').to_i
+  stream = params.fetch('stream')
+  subject = params.fetch('subject')
+  content = params.fetch('content')
+  due_date = params.fetch('due_date')
+  Assignment.create(level: level, stream: stream, subject: subject, due_date: due_date)
+  redirect 'admin/assignment'
 end
 
 get '/students/:id/assignment/:assignment_id' do
-  @assignment=Assignment.find(params.fetch('assignment_id').to_i)
-  @student=Student.find(params.fetch('id').to_i)
+  @assignment = Assignment.find(params.fetch('assignment_id').to_i)
+  @student = Student.find(params.fetch('id').to_i)
   erb :assignment_detail
 end
 
 post '/students/:id/assignment/:assignment_id' do
-  @student_id=params.fetch('id').to_i
-  @assignment_id=params.fetch('assignment_id').to_i
-  content=params.fetch('content')
-  Track.create(student_id: @student_id, assignment_id: @assignment_id, editing: FALSE, revision: FALSE, approved: FALSE, rejected: FALSE,content:content,under_review: TRUE)
+  @student_id = params.fetch('id').to_i
+  @assignment_id = params.fetch('assignment_id').to_i
+  content = params.fetch('content')
+  Track.create(student_id: @student_id, assignment_id: @assignment_id, editing: FALSE, revision: FALSE, approved: FALSE, rejected: FALSE, content: content, under_review: TRUE)
   redirect '/students/'.concat(@student_id.to_s)
 end
 
@@ -186,10 +186,10 @@ post '/admin/grade/new' do
   grade = params.fetch('grade')
   position = params.fetch('position')
   comments = params.fetch('comments')
-  subject_id=params.fetch('select')
+  subject_id = params.fetch('select')
   student = params.fetch('student')
   @new_grade = Grade.create(cat1: cat1, cat2: cat2, cat3: cat3, total: total, grade: grade,
-  position: position, comments: comments)
+                            position: position, comments: comments)
   Result.create(subject_id: subject_id, grade_id: @new_grade.id)
   Perfomances.create(student_id: student, grade_id: @new_grade.id)
   redirect '/admin/grade/new'
