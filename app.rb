@@ -120,7 +120,7 @@ delete('/parents/:id') do
   redirect('/parents')
 end
 
-#new assignment 
+#new assignment
 get '/admin/assignment' do
   erb :new_assignment
 end
@@ -147,4 +147,44 @@ post '/students/:id/assignment/:assignment_id' do
   content=params.fetch('content')
   Track.create(student_id: @student_id, assignment_id: @assignment_id, editing: FALSE, revision: FALSE, approved: FALSE, rejected: FALSE,content:content,under_review: TRUE)
   redirect '/students/'.concat(@student_id.to_s)
+end
+
+# FOR GRADES
+get '/admin/subjects' do
+  @subjects = Subject.all
+  erb :subjects
+end
+
+post '/admin/subjects/new' do
+  subject = params.fetch('subject')
+  @new_subject = Subject.create(name: subject)
+  redirect '/admin/subjects'
+end
+
+get '/admin/grades' do
+  @grades = Grade.all
+  erb :grades
+end
+
+get '/admin/grade/new' do
+  @allstudents = Student.all
+  @allsubjects = Subject.all
+  erb :new_grade
+end
+
+post '/admin/grade/new' do
+  cat1 = params.fetch('cat1')
+  cat2 = params.fetch('cat2')
+  cat3 = params.fetch('cat3')
+  total = params.fetch('total')
+  grade = params.fetch('grade')
+  position = params.fetch('position')
+  comments = params.fetch('comments')
+  subject_id=params.fetch('select')
+  student = params.fetch('student')
+  @new_grade = Grade.create(cat1: cat1, cat2: cat2, cat3: cat3, total: total, grade: grade,
+  position: position, comments: comments)
+  Result.create(subject_id: subject_id, grade_id: @new_grade.id)
+  Perfomances.create(student_id: student, grade_id: @new_grade.id)
+  redirect '/admin/grade/new'
 end
