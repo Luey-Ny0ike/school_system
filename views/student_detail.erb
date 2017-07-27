@@ -24,7 +24,7 @@
 <%if @assignments.any?%>
     <ul>
         <% @assignments.each do |assignment|%>
-            <a href="/students/<%= @student_details.id%>/assignment/<%= assignment.id%>"><%= assignment.subject%>|<%= assignment.content%></a>
+            <a href="/students/<%= @student_details.id%>/assignment/<%= assignment.id%>"><%= assignment.subject%> || <%= assignment.content%></a>
         <%end%>
     </ul>
 <%else%>
