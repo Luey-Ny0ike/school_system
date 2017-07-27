@@ -1,0 +1,17 @@
+<h3>Student Details</h3><br>
+<p><%= @student.name%></p>
+<h3>What Student Submitted:</h3>
+<p><%= @submission.content%></p>
+<hr>
+<h3>Update Status As a Teacher:</h3>
+<form action="/assignment_review" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <input type="hidden" name="assignment_id" value="<%= @assignment.id%>">
+    <input type="hidden" name="student_id" value="<%= @student.id%>">
+    <label>Check Appropriately Below:</label><br>
+    <input type="checkbox" id="rejected" name="rejected">Rejected<br>
+    <input type="checkbox" id="under_review" name="under_review">Under Review</input>
+    <input type="checkbox" id="revision" name="revision">Revision<br>
+    <input type="checkbox" id="approved" name="approved">Approved<br>
+    <button>Update Student Submission</button>
+</form>
