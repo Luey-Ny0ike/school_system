@@ -3,9 +3,20 @@ Bundler.require(:default)
 
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
-def teacher_assigned
-  Assignment.where(level: 1, stream: 'East', teacher_id: 1)
-end
+# enable :sessions
+
+
+# def check_login(username, password)
+#   check=nil
+#   parent=Parent.find_by(username: username)
+#   if parent.password==password
+#     sessions[:username]=username
+#     check=true
+#   else
+#     check=false
+#   end
+#   check
+# end
 get('/') do
   erb(:index)
 end
