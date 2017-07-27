@@ -12,7 +12,11 @@ get '/students' do
   erb :students
 end
 
-post '/student/new' do
+get '/admin/student/new' do
+  erb :new_student
+end
+
+post '/admin/student/new' do
   @student_name = params.fetch('name')
   @student_level = params.fetch('level').to_i
   @student_stream = params.fetch('stream')
@@ -49,8 +53,10 @@ end
 
 get('/parents/new') do
   @students = Student.all
-  erb (:student_detail)
+  erb (:parent_form)
 end
+
+
 
 post('/parents') do
   name = params.fetch('parent_name')
@@ -61,8 +67,8 @@ post('/parents') do
   student_id = params.fetch('id').to_i
   @student = Student.find(student_id)
   @new_parent = Parent.create(name: name, phone: phone, email: email, username: username, password: password, :student_ids => student_id)
-  Association.create(student_id: @student.id, parent_id: @new_parent.id)
-  if @new_parent.save
+  if   Association.create(student_id: @student.id, parent_id: @new_parent.id)
+
     redirect('/parents/'.concat(@new_parent.id.to_s))
   else
     erb(:parent_errors)

@@ -3,6 +3,7 @@ class Parent < ActiveRecord::Base
   has_many :students, through: :associations
   validates(:name, :username, :password, :presence => true)
   validates(:phone, :length => { :maximum => 21})
+  validates(:email, :"@", :presence => true)
   before_save(:titlecase_name)
 
   private

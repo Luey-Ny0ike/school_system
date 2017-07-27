@@ -34,7 +34,7 @@
 
 <h3><%= @student_details.name%>'s Parents/gurdians</h3>
 
-<% @parent_details.any?%>
+<% if @parent_details.any?%>
 <% @parent_details.each do |parent|%>
 <%= parent.name%>
 <br>
@@ -45,9 +45,9 @@
 <%= parent.username%>
 <br>
 <%end%>
-
-<p>No parent</p>
-
+<%else%>
+<p>no parent</p>
+<%end%>
 <form action="/parents" method="post">
   <h3>Add parent information for this student?</h3>
   <input type="hidden" name="id" id="id" value="<%= @student_details.id %>">

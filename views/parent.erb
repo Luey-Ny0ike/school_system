@@ -17,7 +17,8 @@
    <h3>Students Available for <%= @parent.name() %>:</h3>
    <ul>
      <% @parent.students.each() do |student| %>
-     <li><%= student.name() %></li>
+     <a href="/students/<%= student.id%>">
+       <li><%= student.name%></li>
      <% end %>
    </ul>
    <% else %>
