@@ -30,6 +30,16 @@
 <%else%>
     <p>No assignments for your class at the moment</p>
 <%end%>
+
+<% if @perfomances.any?%>
+ <ul>
+   <% @perfomances.each do |perfomance|%>
+    <li><%= perfomance.cat1%></li>
+    <% end %>
+ </ul>
+  <% else %>
+  <p>No grades available</p>
+  <% end %>
 <button type="submit" name="button" class="btn-danger">Delete student</button>
 
 <h3><%= @student_details.name%>'s Parents/gurdians</h3>
