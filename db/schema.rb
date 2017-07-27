@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170726150834) do
+ActiveRecord::Schema.define(version: 20170727123132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20170726150834) do
     t.integer "level"
     t.string "stream"
     t.string "subject"
-    t.integer "teacher_id"
     t.string "content"
     t.datetime "due_date"
     t.datetime "created_at", null: false
@@ -43,6 +42,7 @@ ActiveRecord::Schema.define(version: 20170726150834) do
     t.string "comments"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "subject_name"
   end
 
   create_table "parents", force: :cascade do |t|
