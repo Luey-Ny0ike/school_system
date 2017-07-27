@@ -45,6 +45,7 @@ get '/students/:id' do
   @students = Student.all
   @parent_details = Parent.joins(:associations).where(associations: { student_id: @student_details.id })
   @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
+  @fees = Fee.all()
   erb :student_detail
 end
 
@@ -212,4 +213,21 @@ end
 get '/admin/teacher/:teacher_id/new_assignment' do
   @teacher_id = params.fetch('teacher_id').to_i
   erb :new_assignment
+end
+get '/bursar' do
+  @students = Student.all()
+  erb :bursar
+end
+get '/bursar/student/:id/fees' do
+  @students = Student.all()
+    @student = Student.find(params.fetch('id').to_i)
+  erb(:student_fees)
+end
+
+post '/fees' do
+  amount_paid = params.fetch("amount_paid")
+  student_id = params.fetch("student_id").to_i()
+  due_date = params.fetch("due_date")
+  @fees = Fee.create(student_id: student_id, due_date:due_date, amount_paid: amount_paid)
+  redirect '/students/'.concat(student_id.to_s)
 end
