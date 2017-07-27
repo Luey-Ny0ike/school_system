@@ -6,7 +6,7 @@
 <h3>Students Assigned:</h3>
 <% if @students.any? %>
     <% @students.each do |student|%>
-       <a href="/admin/teacher/0/assignment/<%= @assignment.id%>/student/<%= student.id%>"> <%= student.name%></a>
+       <a href="/admin/teacher/<%=@teacher_id%>/assignment/<%= @assignment.id%>/student/<%= student.id%>"> <%= student.name%></a>
     <%end%>
 <%else%>
     <p>No assigned student</p>
