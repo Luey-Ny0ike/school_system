@@ -12,15 +12,10 @@
     <%end%>
   </select>
 
-    <!-- select subject options -->
-      <input type="hidden" name="subject_id" >
-    <label>Select subject to assign grade</label>
-    <select class="form-control" id="select" name="select">
-      <% @allsubjects.each do |subject|%>
-      <option value="<%= subject.id%>"><%= subject.name%></option>
-      <%end%>
-    </select>
+  
 
+    <label for="subject">subject name</label>
+    <input type="text" name="subject" class="form-control">
       <label for="cat1">Cat 1</label>
       <input type="text" name="cat1" class="form-control">
       <label for="cat2">Cat 2</label>
