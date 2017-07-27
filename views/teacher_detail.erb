@@ -14,14 +14,26 @@
 </form> -->
 
 <h3>Assigned Tasks</h3>
-<p>Click to See Students who have submitted</p>
+<br>
 <%if @assigned_tasks.any?%>
+	<table>
+		<tr>
+			<th>Level&nbsp;&nbsp;</th>
+			<th>Stream&nbsp;&nbsp;</th>
+			<th>Content&nbsp;&nbsp;</th>
+			<th>Link</th>
+		</tr>
 	<% @assigned_tasks.each do |task|%>
-		<p>Level</p><%= task.level%>
-		<p>Stream</p><%= task.stream%>
-		<p>Content</p><%= task.content%><br>
-		<a href="/admin/teacher/<%= @teacher_id%>/assignment/<%= task.id%>">Details</a>
+		<tr>
+			<td><%= task.level%></td>
+			<td><%= task.stream%></td>
+			<td><%= task.content%></td>
+			<td><a href="/admin/teacher/<%= @teacher_id%>/assignment/<%= task.id%>">Open</a></td>
+		</tr>
 	<%end%>
+	</table>
 <%else%>
 	<p>No assigned tasks at the moment</p>
 <%end%>
+<br>
+<a href="/admin/teacher/<%=@teacher_id%>/new_assignment"><button type="button">Add New Assignment</button></a>

@@ -128,7 +128,7 @@ get '/admin/assignment' do
   erb :new_assignment
 end
 
-post '/admin/assignment/new' do
+post '/admin/teacher/:teacher_id/assignment/new' do
   level=params.fetch('level').to_i
   stream=params.fetch('stream')
   subject=params.fetch('subject')
@@ -136,7 +136,7 @@ post '/admin/assignment/new' do
   due_date=params.fetch('due_date')
   teacher_id=params.fetch('teacher_id').to_i
   Assignment.create(level: level,stream: stream, subject: subject, content: content, due_date: due_date, teacher_id: teacher_id)
-  redirect 'admin/assignment'
+  redirect 'admin/teacher/'.concat(teacher_id.to_s)
 end
 
 get '/students/:id/assignment/:assignment_id' do
@@ -166,13 +166,14 @@ get '/admin/teacher/:id' do
   erb :teacher_detail
 end
 
-get '/admin/teacher/0/assignment/:assignment_id' do
+get '/admin/teacher/:teacher_id/assignment/:assignment_id' do
   @assignment=Assignment.find_by(id:params.fetch('assignment_id').to_i)
-  @students=Student.joins(:tracks).where(tracks:{assignment_id: params.fetch('assignment_id').to_i})
+  @teacher_id=params.fetch('teacher_id').to_i
+  @students=Student.where(level: @assignment.id, stream: @assignment.stream)
   erb :teacher_assignment_details
 end
 
-get '/admin/teacher/0/assignment/:assignment_id/student/:student_id' do
+get '/admin/teacher/:teacher_id/assignment/:assignment_id/student/:student_id' do
   @student=Student.find_by(id: params.fetch('student_id').to_i)
   @submission=Track.find_by(student_id: params.fetch('student_id').to_i, assignment_id: params.fetch('assignment_id').to_i)
   @assignment=Assignment.find(params.fetch('assignment_id').to_i)
@@ -189,4 +190,10 @@ patch '/assignment_review' do
   track=Track.find_by(student_id: student_id, assignment_id: assignment_id)
   track.update(revision: revision, approved: approved, rejected: rejected, under_review: under_review)
   redirect '/admin/teacher/0/assignment/'.concat(assignment_id.to_s).concat("/student/").concat(student_id.to_s)
+end
+
+#rout to add new assignment as teacher
+get '/admin/teacher/:teacher_id/new_assignment' do
+  @teacher_id=params.fetch('teacher_id').to_i
+  erb :new_assignment
 end

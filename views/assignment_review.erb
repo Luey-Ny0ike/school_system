@@ -1,7 +1,11 @@
 <h3>Student Details</h3><br>
 <p><%= @student.name%></p>
 <h3>What Student Submitted:</h3>
-<p><%= @submission.content%></p>
+<%if @submission%>
+	<p><%= @submission.content%></p>
+<%else%>
+	<p>Student has not submitted any thing</p>
+<%end%>
 <hr>
 <h3>Update Status As a Teacher:</h3>
 <form action="/assignment_review" method="post">
