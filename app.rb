@@ -3,6 +3,9 @@ Bundler.require(:default)
 
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
+def teacher_assigned
+  Assignment.where(level: 1, stream: "East", teacher_id: 1)
+end
 get('/') do
   erb(:index)
 end
@@ -120,19 +123,20 @@ delete('/parents/:id') do
   redirect('/parents')
 end
 
-#new assignment 
+#new assignment
 get '/admin/assignment' do
   erb :new_assignment
 end
 
 post '/admin/assignment/new' do
-   level=params.fetch('level').to_i
-   stream=params.fetch('stream')
-   subject=params.fetch('subject')
-   content=params.fetch('content')
-   due_date=params.fetch('due_date')
-   Assignment.create(level: level,stream: stream, subject: subject, due_date: due_date)
-   redirect 'admin/assignment'
+  level=params.fetch('level').to_i
+  stream=params.fetch('stream')
+  subject=params.fetch('subject')
+  content=params.fetch('content')
+  due_date=params.fetch('due_date')
+  teacher_id=params.fetch('teacher_id').to_i
+  Assignment.create(level: level,stream: stream, subject: subject, content: content, due_date: due_date, teacher_id: teacher_id)
+  redirect 'admin/assignment'
 end
 
 get '/students/:id/assignment/:assignment_id' do
@@ -147,4 +151,42 @@ post '/students/:id/assignment/:assignment_id' do
   content=params.fetch('content')
   Track.create(student_id: @student_id, assignment_id: @assignment_id, editing: FALSE, revision: FALSE, approved: FALSE, rejected: FALSE,content:content,under_review: TRUE)
   redirect '/students/'.concat(@student_id.to_s)
+end
+
+
+#show teachers
+get '/admin/teachers' do
+  erb :teachers
+end
+
+#teacher portal
+get '/admin/teacher/:id' do
+  @teacher_id=params.fetch('id').to_i
+  @assigned_tasks=Assignment.where(teacher_id: params.fetch('id').to_i)
+  erb :teacher_detail
+end
+
+get '/admin/teacher/0/assignment/:assignment_id' do
+  @assignment=Assignment.find_by(id:params.fetch('assignment_id').to_i)
+  @students=Student.joins(:tracks).where(tracks:{assignment_id: params.fetch('assignment_id').to_i})
+  erb :teacher_assignment_details
+end
+
+get '/admin/teacher/0/assignment/:assignment_id/student/:student_id' do
+  @student=Student.find_by(id: params.fetch('student_id').to_i)
+  @submission=Track.find_by(student_id: params.fetch('student_id').to_i, assignment_id: params.fetch('assignment_id').to_i)
+  @assignment=Assignment.find(params.fetch('assignment_id').to_i)
+  erb :assignment_review
+end
+
+patch '/assignment_review' do
+  assignment_id=params.fetch('assignment_id').to_i
+  student_id=params.fetch('student_id').to_i
+  under_review=false
+  rejected=params[:rejected]=='on' ? true : false
+  approved=params[:approved]=='on' ? true : false
+  revision=params[:revision]=='on' ? true : false
+  track=Track.find_by(student_id: student_id, assignment_id: assignment_id)
+  track.update(revision: revision, approved: approved, rejected: rejected, under_review: under_review)
+  redirect '/admin/teacher/0/assignment/'.concat(assignment_id.to_s).concat("/student/").concat(student_id.to_s)
 end
