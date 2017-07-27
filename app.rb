@@ -309,11 +309,12 @@ end
 get ('/parents/find/') do
   username = params.fetch('username')
   password = params.fetch('password')
+  @parento = Parent.find_by(username: username, password: password)
 
-  if @parento = Parent.find_by(username: username, password: password)
-    redirect '/parent/'.concat(@parento.id.to_s)
+  if @parento.username == 'admin' && @parento.password == password
+    redirect '/admin'
   else
-    erb(:parent_errors)
+   redirect '/parent/'.concat(@parento.id.to_s)
   end
 end
 
