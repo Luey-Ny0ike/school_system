@@ -37,7 +37,7 @@ post '/admin/student/new' do
   redirect '/students'
 end
 
-get '/students/:id' do
+get '/student/:id' do
   @student_details = Student.find(params.fetch('id').to_i)
   @students = Student.all
   @parent_details = Parent.joins(:associations).where(associations: {student_id: @student_details.id})
@@ -45,13 +45,13 @@ get '/students/:id' do
   erb :student_detail
 end
 
-delete '/students/:id' do
+delete '/student/:id' do
   @student_details = Student.find(params.fetch('id').to_i)
   @student_details.destroy
   redirect '/students'
 end
 
-get('/parents/new') do
+get('/admin/search') do
   @students = Student.all
   erb (:parent_form)
 end
@@ -76,7 +76,7 @@ post('/parents') do
 end
 
 
-get('/parents/:id') do
+get('/parent/:id') do
   @parent = Parent.find(params.fetch('id').to_i)
   erb(:parent)
 end
@@ -125,7 +125,7 @@ patch('/parents/:id') do
   end
 end
 
-delete('/parents/:id') do
+delete('/parent/:id') do
   @parent = Parent.find(params.fetch('id').to_i)
   @parent.destroy
   redirect('/parents')
@@ -134,7 +134,7 @@ end
  get ('/students/find/') do
    name = params.fetch('name')
    if @studento=Student.find_by_name(name)
-     erb(:home)
+     redirect '/student/'.concat(@studento.id.to_s)
    else
      erb(:parent_errors)
    end
@@ -162,4 +162,20 @@ post '/students/:id/assignment/:assignment_id' do
   content=params.fetch('content')
   Track.create(student_id: @student_id, assignment_id: @assignment_id, editing: FALSE, revision: FALSE, approved: FALSE, rejected: FALSE,content:content,under_review: TRUE)
   redirect '/students/'.concat(@student_id.to_s)
+end
+
+
+get ('/parents/find/') do
+  username = params.fetch('username')
+  password = params.fetch('password')
+
+  if @parento = Parent.find_by(username: username, password: password)
+    redirect '/parent/'.concat(@parento.id.to_s)
+  else
+    erb(:parent_errors)
+  end
+end
+
+get '/admin' do
+  erb(:admin)
 end

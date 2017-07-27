@@ -1,23 +1,13 @@
-<h1>Welcome to Moringa High </h1>
 
- <p>
-   Track your Child(ren) activities and performance in our school throughout the term.
- </p>
+ <form action="/parents/find/" method="get">
 
- <ul>
-   <li><a href='/parents/new'>Add a New Parent</a></li>
-   <li><a href="/parents">View all Parents</a></li>
-   <li><a href="/students">View all Students</a></li>
-   <li><a href="/admin/student/new">Add new student</a></li>
- </ul>
+     <h2>Parent Login:</h2>
+     <h3>Username:</h3>
+     <input id="username" name="username" type="text">
+
+     <h3>password:</h3>
+     <input id="password" name="password" type="password">
 
 
-
- <form action="/students/find/" method="get">
-
-     <label for="name">Stream:</label>
-     <input id="name" name="name" type="text">
-
-
-     <button type="submit">Search</button>
+     <button type="submit">Login</button>
  </form>
