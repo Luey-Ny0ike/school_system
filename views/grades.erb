@@ -1,0 +1,12 @@
+<% if @grades.any?%>
+<h3>Here are all the grades</h3>
+<ul>
+  <% @grades.each do |grade| %>
+    <li><%= grade.grade%></li>
+    <% end %>
+</ul>
+
+<% else %>
+<p>No grades available</p>
+
+<% end %>

@@ -1,0 +1,37 @@
+<h3>Add new exam results for a student</h3>
+
+<div class="row">
+  <div class="col-md-7">
+    <form class="" action="/admin/grade/new" method="post">
+    <!-- select student options -->
+    <input type="hidden" name="student_id" >
+  <label>Select student to assign grade</label>
+  <select class="form-control" id="student" name="student">
+    <% @allstudents.each do |students|%>
+    <option value="<%= students.id%>"><%= students.name%></option>
+    <%end%>
+  </select>
+
+  
+
+    <label for="subject">subject name</label>
+    <input type="text" name="subject" class="form-control">
+      <label for="cat1">Cat 1</label>
+      <input type="text" name="cat1" class="form-control">
+      <label for="cat2">Cat 2</label>
+      <input type="text" name="cat2" class="form-control">
+      <label for="cat3">Cat 3</label>
+      <input type="text" name="cat3" class="form-control">
+      <label for="total">Total(%)</label>
+      <input type="text" name="total" class="form-control">
+      <label for="grade">Grade in subject</label>
+      <input type="text" name="grade" class="form-control">
+      <label for="position">Position in subject</label>
+      <input type="text" name="position" class="form-control">
+      <label for="comments">Teacher's comments</label>
+      <input type="text" name="comments" class="form-control">
+      <br>
+      <button type="submit" name="button">Submit</button>
+    </form>
+  </div>
+</div>
