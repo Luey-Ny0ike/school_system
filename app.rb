@@ -186,11 +186,10 @@ post '/admin/grade/new' do
   grade = params.fetch('grade')
   position = params.fetch('position')
   comments = params.fetch('comments')
-  subject_id = params.fetch('select')
+  subject = params.fetch('subject')
   student = params.fetch('student')
   @new_grade = Grade.create(cat1: cat1, cat2: cat2, cat3: cat3, total: total, grade: grade,
-                            position: position, comments: comments)
-  Result.create(subject_id: subject_id, grade_id: @new_grade.id)
+                            position: position, comments: comments, subject_name: subject)
   Perfomance.create(student_id: student, grade_id: @new_grade.id)
   redirect '/admin/grade/new'
 end
