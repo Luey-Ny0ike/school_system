@@ -12,7 +12,11 @@ get '/students' do
   erb :students
 end
 
-post '/student/new' do
+get '/admin/student/new' do
+  erb :new_student
+end
+
+post '/admin/student/new' do
   @student_name = params.fetch('name')
   @student_level = params.fetch('level').to_i
   @student_stream = params.fetch('stream')
@@ -36,8 +40,10 @@ end
 get '/students/:id' do
   @student_details = Student.find(params.fetch('id').to_i)
   @students = Student.all
+  @grades = Grade.all
   @parent_details = Parent.joins(:associations).where(associations: {student_id: @student_details.id})
   @assignments=Assignment.student_assignment(@student_details.level.to_i,@student_details.stream)
+  @grades=Grade.student_grade(@student_details.id.to_i, @grades.id.to_i)
   erb :student_detail
 end
 
