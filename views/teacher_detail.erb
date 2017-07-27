@@ -1,0 +1,27 @@
+<!-- <form method="post" action="/runMethod">
+	<label>Level:</label>
+    <select id="select" name="select">
+        <option value="1">Form 1</option>
+        <option value="2">Form 2</option>
+        <option value="3">Form 3</option>
+        <option value="4">Form 4</option>
+    </select>
+    <label>Stream:</label>
+    <input type="text" name="stream">
+    <label>Subject:</label>
+    <input type="text" name="subject">
+    <button type="submit">Get Assignments</button>
+</form> -->
+
+<h3>Assigned Tasks</h3>
+<p>Click to See Students who have submitted</p>
+<%if @assigned_tasks.any?%>
+	<% @assigned_tasks.each do |task|%>
+		<p>Level</p><%= task.level%>
+		<p>Stream</p><%= task.stream%>
+		<p>Content</p><%= task.content%><br>
+		<a href="/admin/teacher/<%= @teacher_id%>/assignment/<%= task.id%>">Details</a>
+	<%end%>
+<%else%>
+	<p>No assigned tasks at the moment</p>
+<%end%>
