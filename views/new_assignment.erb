@@ -1,6 +1,6 @@
 <h3>New Assignment</h3>
 
-<form action="/admin/assignment/new" method="post">
+<form action="/admin/teacher/<%=@teacher_id%>/assignment/new" method="post">
     <label>Level of Study:</label><br>
     <select id="level" name="level">
         <option value="1">Form 1</option>
@@ -18,6 +18,6 @@
     <input type="datetime-local" name="due_date"><br>
     <label>Attachment:</label><br>
     <input type="file" name="assignmentfile"> 
-    <input type="number" name="teacher_id">
+    <input type="hidden" name="teacher_id" value="<%=@teacher_id%>">
     <button type="submit">New Assignment</button>
 </form>
