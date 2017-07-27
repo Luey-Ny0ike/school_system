@@ -3,18 +3,6 @@
  <form action="/parents/<%= @parent.id() %>" method="post">
    <input type="hidden" name="_method" value="patch">
 
-   <!-- <% if @distributor.address().==("\n, ") %>
-   <div class="form-group">
-     <label for="city">Address:</label>
-     <textarea rows='3' name="address"></textarea>
-   </div>
-   <% else %>
-   <div class="form-group">
-     <label for="address">Address:</label>
-     <textarea rows='3' name="address"><%= @distributor.address() %></textarea>
-   </div>
-   <% end %> -->
-
    <div class="form-group">
      <label for="name">Parent Name</label>
      <input type="name" name="name" value="<%= @parent.name() %>">

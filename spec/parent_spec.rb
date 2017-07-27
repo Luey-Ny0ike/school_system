@@ -12,6 +12,12 @@ describe(Parent) do
     expect(parent.save()).to(eq(false))
   end
 
+  it("validates the email of a user has @ in it")  do
+    parent = Parent.new({:email => "@"})
+    expect(parent.save()).to(eq(false))
+  end
+
+
   describe('Parent#titlecase_name') do
     it ("converts the name  of a parent to title case") do
       parent = Parent.create({:name => "paul nderitu"})

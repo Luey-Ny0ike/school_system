@@ -8,7 +8,7 @@
      <% if @parent.phone().!=('') %>
      <%= @parent.phone() %>
      <% else %>
-     no Tel no for this parent number given
+     no Tel no given for this parent
      <% end %>
    </li>
  <ul>
@@ -17,7 +17,8 @@
    <h3>Students Available for <%= @parent.name() %>:</h3>
    <ul>
      <% @parent.students.each() do |student| %>
-     <li><%= student.name() %></li>
+     <a href="/students/<%= student.id%>">
+       <li><%= student.name%></li>
      <% end %>
    </ul>
    <% else %>

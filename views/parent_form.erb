@@ -1,35 +1,13 @@
-<h1>Add a New Parent</h1>
- <form action="/parents" method="post">
 
-   <div class="form-group">
-     <label for="name">Parent Name:</label>
-     <input type="text" name="parent_name" id="parent_name">
-   </div>
 
-   <div class="form-group">
-     <label for="phone">Telephone:</label>
-     <input type="text" name="phone" id="phone">
-   </div>
-   <div class="form-group">
-     <label for="email">Email Address:</label>
-     <input type="text" name="email" id="email">
-   </div>
-   <div class="form-group">
-     <label for="username">Username:</label>
-     <input type="text" name="username" id="username">
-   </div>
-   <div class="form-group">
-     <label for="password">Password:</label>
-     <input type="password" name="password" id="password">
-   </div>
-  <button type="submit" class="btn">Add Parent</button>
- </form>
+<h1>Search For an existing Student by name:</h1>
 
- <!-- <h3>Add students to this parent? </h3>
-  <form action="/students" method="post">
-    <div class="form-group">
-      <label for="name">Student Name:</label>
-      <input type="text" name="name">
-    </div>
-    <button type="submit" class="btn">Add Student</button>
-  </form> -->
+
+<form action="/students/find/" method="get">
+
+    <label for="name">Stream:</label>
+    <input id="name" name="name" type="text">
+
+
+    <button type="submit">Search</button>
+</form>
