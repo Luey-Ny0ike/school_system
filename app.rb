@@ -43,7 +43,7 @@ get '/students/:id' do
   @grades = Grade.all
   @parent_details = Parent.joins(:associations).where(associations: { student_id: @student_details.id })
   @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
-  @grades = Grade.student_grade(@student_details.id.to_i, @grades.id.to_i)
+  @perfomances = Grade.joins(:perfomances).where(perfomances:{student_id: params.fetch('id').to_i})
   erb :student_detail
 end
 
@@ -191,6 +191,6 @@ post '/admin/grade/new' do
   @new_grade = Grade.create(cat1: cat1, cat2: cat2, cat3: cat3, total: total, grade: grade,
                             position: position, comments: comments)
   Result.create(subject_id: subject_id, grade_id: @new_grade.id)
-  Perfomances.create(student_id: student, grade_id: @new_grade.id)
+  Perfomance.create(student_id: student, grade_id: @new_grade.id)
   redirect '/admin/grade/new'
 end
