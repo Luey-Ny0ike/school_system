@@ -1,0 +1,13 @@
+<h3>Assignment:</h3>
+    <p><%= @assignment.level%></p><br>
+    <p><%= @assignment.stream%></p><br>
+    <p><%= @assignment.subject%></p><br>
+    <p><%= @assignment.content%></p><br>
+<h3>Students Assigned:</h3>
+<% if @students.any? %>
+    <% @students.each do |student|%>
+       <a href="/admin/teacher/0/assignment/<%= @assignment.id%>/student/<%= student.id%>"> <%= student.name%></a>
+    <%end%>
+<%else%>
+    <p>No assigned student</p>
+<%end%>
