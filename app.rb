@@ -43,15 +43,10 @@ end
 get '/students/:id' do
   @student_details = Student.find(params.fetch('id').to_i)
   @students = Student.all
-<<<<<<< HEAD
-  @parent_details = Parent.joins(:associations).where(associations: { student_id: @student_details.id })
-  @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
-=======
   @grades = Grade.all
   @parent_details = Parent.joins(:associations).where(associations: { student_id: @student_details.id })
   @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
   @perfomances = Grade.joins(:perfomances).where(perfomances:{student_id: params.fetch('id').to_i})
->>>>>>> 8ee872485fcc67c95945a3e695a346722f933f51
   erb :student_detail
 end
 
@@ -143,17 +138,12 @@ get '/admin/assignment' do
   erb :new_assignment
 end
 
-<<<<<<< HEAD
 post '/admin/teacher/:teacher_id/assignment/new' do
-=======
-post '/admin/assignment/new' do
->>>>>>> 8ee872485fcc67c95945a3e695a346722f933f51
   level = params.fetch('level').to_i
   stream = params.fetch('stream')
   subject = params.fetch('subject')
   content = params.fetch('content')
   due_date = params.fetch('due_date')
-<<<<<<< HEAD
   teacher_id = params.fetch('teacher_id').to_i
   Assignment.create(level: level, stream: stream, subject: subject, content: content, due_date: due_date, teacher_id: teacher_id)
   redirect 'admin/teacher/'.concat(teacher_id.to_s)
@@ -166,10 +156,6 @@ get ('/students/find/') do
   else
     erb(:parent_errors)
   end
-=======
-  Assignment.create(level: level, stream: stream, subject: subject, due_date: due_date)
-  redirect 'admin/assignment'
->>>>>>> 8ee872485fcc67c95945a3e695a346722f933f51
 end
 
 get '/students/:id/assignment/:assignment_id' do
@@ -186,7 +172,6 @@ post '/students/:id/assignment/:assignment_id' do
   redirect '/students/'.concat(@student_id.to_s)
 end
 
-<<<<<<< HEAD
 # show teachers
 get '/admin/teachers' do
   erb :teachers
@@ -229,7 +214,8 @@ end
 get '/admin/teacher/:teacher_id/new_assignment' do
   @teacher_id = params.fetch('teacher_id').to_i
   erb :new_assignment
-=======
+end
+
 # FOR GRADES
 get '/admin/subjects' do
   @subjects = Subject.all
@@ -267,5 +253,4 @@ post '/admin/grade/new' do
                             position: position, comments: comments, subject_name: subject)
   Perfomance.create(student_id: student, grade_id: @new_grade.id)
   redirect '/admin/grade/new'
->>>>>>> 8ee872485fcc67c95945a3e695a346722f933f51
 end
