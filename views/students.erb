@@ -3,7 +3,7 @@
 <% if @students.any?()%>
 <ul>
   <% @students.each do |student|%>
-  <a href="/student/<%= student.id%>">
+  <a href="/admin/student/<%= student.id%>">
     <li><%= student.name%></li>
   </a>
 </ul>
