@@ -3,9 +3,20 @@ Bundler.require(:default)
 
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
-def teacher_assigned
-  Assignment.where(level: 1, stream: 'East', teacher_id: 1)
-end
+# enable :sessions
+
+
+# def check_login(username, password)
+#   check=nil
+#   parent=Parent.find_by(username: username)
+#   if parent.password==password
+#     sessions[:username]=username
+#     check=true
+#   else
+#     check=false
+#   end
+#   check
+# end
 get('/') do
   erb(:index)
 end
@@ -40,22 +51,25 @@ post '/admin/student/new' do
   redirect '/students'
 end
 
-get '/students/:id' do
+get '/student/:id' do
   @student_details = Student.find(params.fetch('id').to_i)
   @students = Student.all
+  @grades = Grade.all
   @parent_details = Parent.joins(:associations).where(associations: { student_id: @student_details.id })
-  @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
   @fees = Fee.all()
+  @assignments=Assignment.joins(:tracks).where(tracks:{student_id: params.fetch('id').to_i})
+  # @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
+    @perfomances = Grade.joins(:perfomances).where(perfomances:{student_id: params.fetch('id').to_i})
   erb :student_detail
 end
 
-delete '/students/:id' do
+delete '/student/:id' do
   @student_details = Student.find(params.fetch('id').to_i)
   @student_details.destroy
   redirect '/students'
 end
 
-get('/parents/new') do
+get('/admin/search') do
   @students = Student.all
   erb :parent_form
 end
@@ -77,7 +91,8 @@ post('/parents') do
   end
 end
 
-get('/parents/:id') do
+
+get('/parent/:id') do
   @parent = Parent.find(params.fetch('id').to_i)
   erb(:parent)
 end
@@ -126,7 +141,7 @@ patch('/parents/:id') do
   end
 end
 
-delete('/parents/:id') do
+delete('/parent/:id') do
   @parent = Parent.find(params.fetch('id').to_i)
   @parent.destroy
   redirect('/parents')
@@ -136,6 +151,15 @@ end
 get '/admin/assignment' do
   erb :new_assignment
 end
+
+ get ('/students/find/') do
+   name = params.fetch('name')
+   if @studento=Student.find_by_name(name)
+     redirect '/student/'.concat(@studento.id.to_s)
+   else
+     erb(:parent_errors)
+   end
+ end
 
 post '/admin/teacher/:teacher_id/assignment/new' do
   level = params.fetch('level').to_i
@@ -230,4 +254,58 @@ post '/fees' do
   due_date = params.fetch("due_date")
   @fees = Fee.create(student_id: student_id, due_date:due_date, amount_paid: amount_paid)
   redirect '/students/'.concat(student_id.to_s)
+end
+
+# FOR GRADES
+get '/admin/subjects' do
+  @subjects = Subject.all
+  erb :subjects
+end
+
+post '/admin/subjects/new' do
+  subject = params.fetch('subject')
+  @new_subject = Subject.create(name: subject)
+  redirect '/admin/subjects'
+end
+
+get '/admin/grades' do
+  @grades = Grade.all
+  erb :grades
+end
+
+get '/admin/grade/new' do
+  @allstudents = Student.all
+  @allsubjects = Subject.all
+  erb :new_grade
+end
+
+post '/admin/grade/new' do
+  cat1 = params.fetch('cat1')
+  cat2 = params.fetch('cat2')
+  cat3 = params.fetch('cat3')
+  total = params.fetch('total')
+  grade = params.fetch('grade')
+  position = params.fetch('position')
+  comments = params.fetch('comments')
+  subject = params.fetch('subject')
+  student = params.fetch('student')
+  @new_grade = Grade.create(cat1: cat1, cat2: cat2, cat3: cat3, total: total, grade: grade,
+                            position: position, comments: comments, subject_name: subject)
+  Perfomance.create(student_id: student, grade_id: @new_grade.id)
+  redirect '/admin/grade/new'
+end
+
+get ('/parents/find/') do
+  username = params.fetch('username')
+  password = params.fetch('password')
+
+  if @parento = Parent.find_by(username: username, password: password)
+    redirect '/parent/'.concat(@parento.id.to_s)
+  else
+    erb(:parent_errors)
+  end
+end
+
+get '/admin' do
+  erb(:admin)
 end

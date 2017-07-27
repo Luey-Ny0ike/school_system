@@ -42,6 +42,19 @@ ActiveRecord::Schema.define(version: 20170727181627) do
     t.integer "student_id"
   end
 
+  create_table "grades", force: :cascade do |t|
+    t.integer "cat1"
+    t.integer "cat2"
+    t.integer "cat3"
+    t.integer "total"
+    t.string "grade"
+    t.integer "position"
+    t.string "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "subject_name"
+  end
+
   create_table "parents", force: :cascade do |t|
     t.string "name"
     t.string "phone"
@@ -52,6 +65,18 @@ ActiveRecord::Schema.define(version: 20170727181627) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "perfomances", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "grade_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.integer "subject_id"
+    t.integer "grade_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "name"
     t.integer "level"
@@ -60,6 +85,12 @@ ActiveRecord::Schema.define(version: 20170727181627) do
     t.string "dormitory"
     t.string "clubs"
     t.string "events"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
