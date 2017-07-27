@@ -72,4 +72,18 @@
   <p>No grades available</p>
   <% end %>
 
+  <h4>Fee Information</h4>
+    <p>Total Fees: <%= @student_details.fee %> </p>
+    <% if @student_details.fees.any?() %>
+    <% @student_details.fees.each() do |fee| %>
+    <% if @student_details.fee == fee.amount_paid %>
+      You have cleared your balance
+    <% else %>
+    <p>Amount Paid: <%= fee.amount_paid() %><p>
+    <p>Balance:<%= @student_details.fee.to_i.-(fee.amount_paid) %> </p>
+    <% end %>
+    <% end %>
+    <% else %>
+      You have not began clearing your fees, Kindly check with the bursar as soon as possible
+    <% end %>
 <li><a href='/'>Home</a></li>

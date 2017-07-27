@@ -1,0 +1,7 @@
+<ol>
+  <% @students.each do |student|%>
+  <a href="bursar/student/<%= student.id%>/fees">
+    <li><%= student.name%></li>
+  </a>
+  <% end %>
+</ol>
