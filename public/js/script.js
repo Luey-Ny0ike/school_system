@@ -11,4 +11,9 @@ $(document).ready(function(){
         $('#login_form_admin').hide(1000);
         $('#login_form_parent').hide(1000);
     });
+    $("#parentAddForm").click(function(){
+         event.preventDefault()
+      $('.parentAddForm').show(1000);
+      $('#parentAddForm').hide(1000);
+});
 });
