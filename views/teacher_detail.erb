@@ -13,27 +13,34 @@
     <button type="submit">Get Assignments</button>
 </form> -->
 
-<h3>Assigned Tasks</h3>
-<br>
-<%if @assigned_tasks.any?%>
-	<table>
-		<tr>
-			<th>Level&nbsp;&nbsp;</th>
-			<th>Stream&nbsp;&nbsp;</th>
-			<th>Content&nbsp;&nbsp;</th>
-			<th>Link</th>
-		</tr>
-	<% @assigned_tasks.each do |task|%>
-		<tr>
-			<td><%= task.level%></td>
-			<td><%= task.stream%></td>
-			<td><%= task.content%></td>
-			<td><a href="/admin/teacher/<%= @teacher_id%>/assignment/<%= task.id%>">Open</a></td>
-		</tr>
-	<%end%>
-	</table>
-<%else%>
-	<p>No assigned tasks at the moment</p>
-<%end%>
-<br>
-<a href="/admin/teacher/<%=@teacher_id%>/new_assignment"><button type="button">Add New Assignment</button></a>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h3 class="h3 text-success">Assigned Tasks</h3>
+			<br>
+			<%if @assigned_tasks.any?%>
+				<table class="table">
+					<tr>
+						<th>Level&nbsp;&nbsp;</th>
+						<th>Stream&nbsp;&nbsp;</th>
+						<th>Content&nbsp;&nbsp;</th>
+						<th>Link</th>
+					</tr>
+				<% @assigned_tasks.each do |task|%>
+					<tr>
+						<td><%= task.level%></td>
+						<td><%= task.stream%></td>
+						<td><%= task.content%></td>
+						<td><a href="/admin/teacher/<%= @teacher_id%>/assignment/<%= task.id%>">Open</a></td>
+					</tr>
+				<%end%>
+				</table>
+			<%else%>
+				<p class="">No assigned tasks at the moment</p>
+			<%end%>
+			<br>
+			<a href="/admin/teacher/<%=@teacher_id%>/new_assignment"><button class="btn btn-success" type="button">Add New Assignment</button></a>
+			<a href="/admin/grade/new"><button class="btn btn-success" type="button" name="button">Add grades</button></a>
+		</div>
+	</div>
+</div>

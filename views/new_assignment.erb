@@ -1,25 +1,31 @@
-<h3>New Assignment</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <h3 class="h3 text-success">New Assignment</h3>
 
-<form action="/admin/teacher/<%=@teacher_id%>/assignment/new" method="post">
-    <label>Level of Study:</label><br>
-    <select id="level" name="level">
-        <option value="1">Form 1</option>
-        <option value="2">Form 2</option>
-        <option value="3">Form 3</option>
-        <option value="4">Form 4</option>
-    </select> <br>
-    <label>Stream:</label><br>
-    <input type="text" name="stream"><br>
-    <label>Subject: </label><br>
-    <input type="text" name="subject"><br>
-    <label>Assignment Details: </label><br>
-    <textarea type="text" name="content" cols="50" rows="10"></textarea><br>
-    <label>Due Date</label><br>
-    <input type="datetime-local" name="due_date"><br>
-    <label>Attachment:</label><br>
-    <input type="file" name="assignmentfile">
-    <input type="hidden" name="teacher_id" value="<%=@teacher_id%>">
-    <button type="submit">New Assignment</button>
-</form>
+      <form class="form-group" action="/admin/teacher/<%=@teacher_id%>/assignment/new" method="post">
+          <label>Level of Study:</label><br>
+          <select class="form-control" id="level" name="level">
+              <option value="1">Form 1</option>
+              <option value="2">Form 2</option>
+              <option value="3">Form 3</option>
+              <option value="4">Form 4</option>
+          </select> <br>
+          <label>Stream:</label><br>
+          <input class="form-control" type="text" name="stream"><br>
+          <label>Subject: </label><br>
+          <input class="form-control" type="text" name="subject"><br>
+          <label>Assignment Details: </label><br>
+          <textarea class="form-control" type="text" name="content" cols="50" rows="10"></textarea><br>
+          <label>Due Date</label><br>
+          <input class="form-control" type="datetime-local" name="due_date"><br>
+          <label>Attachment:</label><br>
+          <input class="form-control" type="file" name="assignmentfile">
+          <input class="form-control" type="hidden" name="teacher_id" value="<%=@teacher_id%>">
+          <button class="btn btn-primary" type="submit">New Assignment</button>
+      </form>
 
-<li><a href='/'>Home</a></li>
+      <li><a href='/'>Home</a></li>
+    </div>
+  </div>
+</div>

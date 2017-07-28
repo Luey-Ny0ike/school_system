@@ -2,7 +2,8 @@
   display: none;
   margin-left: 37%
 }
-.login_form_admin{
+
+.login_form_admin {
   display: none;
     margin-left: 37%
 }
@@ -12,11 +13,13 @@
 #login_form_parent{
   font-size: 30px
 }
+
 .buttons {
   text-align: center;
   margin-top: 2%
 }
-.login_form{
+
+.login_form {
   text-align: center;
 }
 .example5 .navbar-brand {

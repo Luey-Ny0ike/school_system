@@ -1,19 +1,22 @@
 
-<body>
-  <div class="container">
-    <form action="/students/find/" method="get" class = "form-inline" id="search-form">
+  <div class="container search">
+    <div class="row">
+      <div class="col-md-6">
+    <form action="/students/find/" method="get" >
 
-        <label for="name">Student Name</label>
-        <input id="name" name="name" type="text" class = "form-control" >
+        <h2>Search student by name:</h2>
+        <input id="name" name="name" type="text" class="form-control">
 
-
-        <button type="submit" class = "btn">Search</button>
+        <br>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
-<ul>
-  <li><a href='/admin/search'>Add a New Parent</a></li>
-  <li><a href="/parents">View all Parents</a></li>
-  <li><a href="/students">View all Students</a></li>
-  <li><a href="/admin/student/new">Add new student</a></li>
-</ul>
+    </div>
+    </div>
+    <ul>
+      <li><a href='/admin/search'>Add a New Parent</a></li>
+      <li><a href="/parents">View all Parents</a></li>
+      <li><a href="/students">View all Students</a></li>
+      <li><a href="/admin/student/new">Add new student</a></li>
+      <li><a href="/admin/teachers">Assign an assignment</a></li>
+    </ul>
 </div>
-</body>

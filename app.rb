@@ -144,7 +144,7 @@ patch('/parents/:id') do
     end
   end
 
-  @parent.update(ame: name, phone: phone, email: email, username: username, student_ids: all_student_ids)
+  @parent.update(name: name, phone: phone, email: email, username: username, student_ids: all_student_ids)
   if @parent.save
     redirect('/parent/'.concat(@parent.id.to_s))
   else
@@ -166,7 +166,7 @@ end
  get ('/students/find/') do
    name = params.fetch('name')
    if @studento=Student.find_by_name(name)
-     redirect '/student/'.concat(@studento.id.to_s)
+     redirect '/admin/student/'.concat(@studento.id.to_s)
    else
      erb(:parent_errors)
    end
