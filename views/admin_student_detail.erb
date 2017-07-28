@@ -71,7 +71,7 @@
     <% else %>
     <p>No grades available</p>
     <% end %>
-  <button type="submit" name="button" class="btn-danger">Delete student</button>
+  <button type="submit" name="button" class="btn btn-danger">Delete student</button>
 
   <h3><%= @student_details.name%>'s Parents/gurdians</h3>
 
@@ -89,6 +89,12 @@
   <%else%>
   <p>no parent</p>
   <%end%>
+
+  <hr>
+<div class="add_parent row">
+  <div class="col-md-5">
+    <button type="button" name="button" class= "btn btn-default btn-lg" id="parentAddForm" style="text-align:center">Add Parent Information</button>
+  <div class="parentAddForm">
   <form action="/parents" method="post">
     <h3>Add parent information for this student?</h3>
     <input type="hidden" name="id" id="id" value="<%= @student_details.id %>">
@@ -116,7 +122,6 @@
 
     <button type="submit" class="btn">Add Parent</button>
   </form>
-
-  <li><a href='/'>Home</a></li>
-
+</div>
+</div>
 </div>
