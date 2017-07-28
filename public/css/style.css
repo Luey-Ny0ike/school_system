@@ -3,15 +3,20 @@
   margin-top: 20%;
   text-align: left;
 }
-.login_form_admin{
+
+.login_form_admin {
   display: none;
-    margin-top: 20%;
-    text-align: right;
+  margin-top: 20%;
+  text-align: right;
 }
+
 .buttons {
   text-align: center;
   margin-top: 10%
 }
-.login_form{
+
+.login_form {
   text-align: center;
 }
+
+.search {}
