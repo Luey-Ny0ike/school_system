@@ -56,11 +56,10 @@ get '/student/:id' do
   @students = Student.all
   @grades = Grade.all
   @parent_details = Parent.joins(:associations).where(associations: { student_id: @student_details.id })
+  @fees = Fee.all()
   @assignments=Assignment.joins(:tracks).where(tracks:{student_id: params.fetch('id').to_i})
   # @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
     @perfomances = Grade.joins(:perfomances).where(perfomances:{student_id: params.fetch('id').to_i})
-    @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
-    @fees = Fee.all()
   erb :student_detail
 end
 
@@ -145,7 +144,7 @@ patch('/parents/:id') do
     end
   end
 
-  @parent.update(ame: name, phone: phone, email: email, username: username, student_ids: all_student_ids)
+  @parent.update(name: name, phone: phone, email: email, username: username, student_ids: all_student_ids)
   if @parent.save
     redirect('/parent/'.concat(@parent.id.to_s))
   else
@@ -167,7 +166,7 @@ end
  get ('/students/find/') do
    name = params.fetch('name')
    if @studento=Student.find_by_name(name)
-     redirect '/student/'.concat(@studento.id.to_s)
+     redirect '/admin/student/'.concat(@studento.id.to_s)
    else
      erb(:parent_errors)
    end
@@ -250,6 +249,23 @@ get '/admin/teacher/:teacher_id/new_assignment' do
   @teacher_id = params.fetch('teacher_id').to_i
   erb :new_assignment
 end
+get '/bursar' do
+  @students = Student.all()
+  erb :bursar
+end
+get '/bursar/student/:id/fees' do
+  @students = Student.all()
+    @student = Student.find(params.fetch('id').to_i)
+  erb(:student_fees)
+end
+
+post '/fees' do
+  amount_paid = params.fetch("amount_paid")
+  student_id = params.fetch("student_id").to_i()
+  due_date = params.fetch("due_date")
+  @fees = Fee.create(student_id: student_id, due_date:due_date, amount_paid: amount_paid)
+  redirect '/students/'.concat(student_id.to_s)
+end
 
 # FOR GRADES
 get '/admin/subjects' do
@@ -293,32 +309,15 @@ end
 get ('/parents/find/') do
   username = params.fetch('username')
   password = params.fetch('password')
+  @parento = Parent.find_by(username: username, password: password)
 
-  if @parento = Parent.find_by(username: username, password: password)
-    redirect '/parent/'.concat(@parento.id.to_s)
+  if @parento.username == 'admin' && @parento.password == password
+    redirect '/admin'
   else
-    erb(:parent_errors)
+   redirect '/parent/'.concat(@parento.id.to_s)
   end
 end
 
 get '/admin' do
   erb(:admin)
-end
-
-get '/bursar' do
-  @students = Student.all()
-  erb :bursar
-end
-get '/bursar/student/:id/fees' do
-  @students = Student.all()
-    @student = Student.find(params.fetch('id').to_i)
-  erb(:student_fees)
-end
-
-post '/fees' do
-  amount_paid = params.fetch("amount_paid")
-  student_id = params.fetch("student_id").to_i()
-  due_date = params.fetch("due_date")
-  @fees = Fee.create(student_id: student_id, due_date:due_date, amount_paid: amount_paid)
-  redirect '/students/'.concat(student_id.to_s)
 end

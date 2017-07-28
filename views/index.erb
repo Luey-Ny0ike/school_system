@@ -1,15 +1,45 @@
+<div class="container-fluid">
+  <div class="login_form_parent">
+    <h1>Login</h1>
+    <form action="/parents/find/" method="get" class="form-inline">
 
- <form action="/parents/find/" method="get">
+      <div class="form-group">
+        <label for="username">UserName</label>
+        <input id="username" name="username" type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" class=form-control>
+      </div>
+      <button type="submit" class="btn btn-default">Login</button>
+    </form>
+  </div>
+</div>
+<div class="login_form_admin">
+  <form action="/parents/find/" method="get" class="form-inline">
+          <h2>Admin Login</h2>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" class="form-control">
 
-     <h2>Parent Login:</h2>
-     <h3>Username:</h3>
-     <input id="username" name="username" type="text">
+    </div>
 
-     <h3>password:</h3>
-     <input id="password" name="password" type="password">
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" class=form-control>
+    </div>
 
+    <button type="submit" class="btn btn-default">Login</button>
+  </form>
+</div>
 
-     <button type="submit">Login</button>
- </form>
-<br>
-<a href="/parent/login"><button >Sign in as Parent</button></a>
+</div>
+</div>
+
+<div class="buttons">
+<button type="button" name="button" id="login_form_parent" class='btn btn-info btn-lg'>Parent Login</button>
+
+<button type="button" name="button" id="login_form_admin" class='btn btn-info btn-lg'>Admin Login</button>
+
+</div>
+</div>
