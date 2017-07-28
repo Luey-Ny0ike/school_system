@@ -1,47 +1,53 @@
-
-
 <body>
-   <div class="container">
+  <div class="container">
     <div class="row">
-    <form action="/students/find/" method="get" class = "form-inline" style="text-align:center" >
+      <form action="/students/find/" method="get" class="form-inline" style="text-align:center">
 
         <h2>Search</h2>
-        <label for="Name">Student Name: </label>
+        <label for="Name">Student Name:
+        </label>
         <input id="name" name="name" type="text" class="form-control">
 
         <button type="submit" class="btn btn-primary">Search</button>
-    </form>
+      </form>
     </div>
 
     <hr>
 
-    <ul>
       <div class="row">
         <div class="col-md-2">
-    <a href='/admin/search'  class="btn btn-info">Register A Parent</a>
-        </div>
-        <div class="col-md-2">
-          <p><a href="/parents" class="btn btn-info">View Parents</a></p>
+          <a href='/admin/search' class="btn btn-info">Register A Parent</a>
+          </div>
+          <div class="col-md-2">
+            <p>
+              <a href="/parents" class="btn btn-info">View Parents</a>
+            </p>
 
-        </div>
-        <div class="col-md-2">
-          <p><a href="/students" class="btn btn-info">View Students</a></p>
+          </div>
+          <div class="col-md-2">
+            <p>
+              <a href="/students" class="btn btn-info">View Students</a>
+            </p>
 
-        </div>
-        <div class="col-md-2">
-          <p><a href="/admin/student/new" class="btn btn-info">Register A student</a></p>
+          </div>
+          <div class="col-md-2">
+            <p>
+              <a href="/admin/student/new" class="btn btn-info">Register A student</a>
+            </p>
 
-        </div>
-        <div class="col-md-2">
-          <p><a href="/admin/teachers" class="btn btn-info">Assign an assignment</a></p>
+          </div>
+          <div class="col-md-2">
+            <p>
+              <a href="/admin/teachers" class="btn btn-info">Assign an assignment</a>
+            </p>
 
-        </div>
-        <div class="col-md-2">
-          <p><a href="/admin/bursar" class="btn btn-info">Update Student fees</a></p>
+          </div>
+          <div class="col-md-2">
+            <p>
+              <a href="/admin/bursar" class="btn btn-info">Update Student fees</a>
+            </p>
 
+          </div>
         </div>
-      </div>
-    </ul>
-</div>
-</div>
+    </div>
 </body>
