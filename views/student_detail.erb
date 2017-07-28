@@ -1,95 +1,97 @@
-<h4>Name</h4>
-<%= @student_details.name%>
-<br>
-<h4>Level</h4>
-<%= @student_details.level%>
-<br>
-<h4>Stream</h4>
-<%= @student_details.stream%>
-<br>
-<h4>Fee</h4>
-<%= @student_details.fee%>
-<br>
-<h4>Dormitory</h4>
-<%= @student_details.dormitory%>
-<br>
-<h4>Clubs</h4>
-<%= @student_details.clubs%>
-<br>
-<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="h2 text-primary">Student Details</h2>
+      <h4 class="text-success">Name: <em><%= @student_details.name%></em></h4>
+      <br>
+      <h4 class="text-success">Level: <em><%= @student_details.level%></em></h4>
+      <br>
+      <h4 class="text-success">Stream: <em><%= @student_details.stream%></em></h4>
+      <br>
+      <h4 class="text-success">Fee: <em><%= @student_details.fee%></em></h4>
+      <br>
+      <h4 class="text-success">Dormitory: <em><%= @student_details.dormitory%></em></h4>
+      <br>
+      <h4 class="text-success">Clubs: <em><%= @student_details.clubs%></em></h4>
 
-<h3>Assignments</h3>
-<hr>
+    </div>
+    <div class="col-md-6">
+      <h3>Assignments</h3>
+      <hr>
 
-<%if @assignments.any?%>
-    <ul>
-        <% @assignments.each do |assignment|%>
-            <a href="/students/<%= @student_details.id%>/assignment/<%= assignment.id%>"><%= assignment.subject%> || <%= assignment.content%></a>
-        <%end%>
-    </ul>
-<%else%>
-    <p>No assignments for your class at the moment</p>
-<%end%>
+      <%if @assignments.any?%>
+          <ul>
+              <% @assignments.each do |assignment|%>
+                  <a href="/students/<%= @student_details.id%>/assignment/<%= assignment.id%>"><%= assignment.subject%> || <%= assignment.content%></a>
+              <%end%>
+          </ul>
+      <%else%>
+          <p>No assignments for your class at the moment</p>
+      <%end%>
+    </div>
+  </div>
+  <hr>
+  <h3>Grades</h3>
 
-<h3>Grades</h3>
-<hr>
-<% if @perfomances.any?%>
- <ul>
-   <% @perfomances.each do |perfomance|%>
-   <h3><%= @student_details.name%>'s perfomance</h3>
-   <div class="table-responsive">
-<table class="table">
- <thead>
-   <tr>
-     <th>Subject</th>
-     <th>Cat 1</th>
-     <th>cat 2</th>
-     <th>Cat 3</th>
-     <th>Total(%)</th>
-     <th>Grade</th>
-     <th>Position in subject</th>
-     <th>Teacher's comments</th>
-   </tr>
- </thead>
- <tbody>
-   <tr>
-     <td><%= perfomance.subject_name%></td>
-     <td><%= perfomance.cat1%></td>
-     <td><%= perfomance.cat2%></td>
-     <td><%= perfomance.cat3%></td>
-     <td><%= perfomance.total%></td>
-     <td><%= perfomance.grade%></td>
-     <td><%= perfomance.position%></td>
-     <td><%= perfomance.comments%></td>
-   </tr>
- </tbody>
-</table>
-</div>
-</div>
+  <% if @perfomances.any?%>
+   <ul>
+     <% @perfomances.each do |perfomance|%>
+     <h3><%= @student_details.name%>'s perfomance</h3>
+     <div class="table-responsive">
+  <table class="table">
+   <thead>
+     <tr>
+       <th>Subject</th>
+       <th>Cat 1</th>
+       <th>cat 2</th>
+       <th>Cat 3</th>
+       <th>Total(%)</th>
+       <th>Grade</th>
+       <th>Position in subject</th>
+       <th>Teacher's comments</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr>
+       <td><%= perfomance.subject_name%></td>
+       <td><%= perfomance.cat1%></td>
+       <td><%= perfomance.cat2%></td>
+       <td><%= perfomance.cat3%></td>
+       <td><%= perfomance.total%></td>
+       <td><%= perfomance.grade%></td>
+       <td><%= perfomance.position%></td>
+       <td><%= perfomance.comments%></td>
+     </tr>
+   </tbody>
+  </table>
+  </div>
+  </div>
+      <% end %>
+   </ul>
+    <% else %>
+    <p>No grades available</p>
     <% end %>
- </ul>
-  <% else %>
-  <p>No grades available</p>
-  <% end %>
 
 
-
-<h4>Fee Information</h4>
-  <p>Total Fees: <%= @student_details.fee %> </p>
-  <% if @student_details.fees.any?() %>
-  <% @student_details.fees.each() do |fee| %>
-  <% if @student_details.fee == fee.amount_paid %>
-    You have cleared your balance
-  <% else %>
-  <p>Amount Paid: <%= fee.amount_paid() %><p>
-  <p>Balance:<%= @student_details.fee.to_i.-(fee.amount_paid) %> </p>
-  <% end %>
-  <% end %>
-  <% else %>
-    You have not began clearing your fees, Kindly check with the bursar as soon as possible
-  <% end %>
+      <hr>
+  <h4>Fee Information</h4>
+    <p>Total Fees: <%= @student_details.fee %> </p>
+    <% if @student_details.fees.any?() %>
+    <% @student_details.fees.each() do |fee| %>
+    <% if @student_details.fee == fee.amount_paid %>
+      You have cleared your balance
+    <% else %>
+    <p>Amount Paid: <%= fee.amount_paid() %><p>
+    <p>Balance:<%= @student_details.fee.to_i.-(fee.amount_paid) %> </p>
+    <% end %>
+    <% end %>
+    <% else %>
+      You have not began clearing your fees, Kindly check with the bursar as soon as possible
+    <% end %>
 
 
 
 
-<li><a href='/'>Home</a></li>
+  <li><a href='/'>Home</a></li>
+
+</div>
