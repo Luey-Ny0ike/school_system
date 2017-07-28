@@ -7,7 +7,7 @@ $(document).ready(function(){
     });
     $("#login_form_admin").click(function(){
          event.preventDefault()
-        $('.login_form_admin').show(1000);
+        $('.login_form_admin').show(-1000);
         $('#login_form_admin').hide(1000);
         $('#login_form_parent').hide(1000);
     });

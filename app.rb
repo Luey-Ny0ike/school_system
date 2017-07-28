@@ -249,11 +249,11 @@ get '/admin/teacher/:teacher_id/new_assignment' do
   @teacher_id = params.fetch('teacher_id').to_i
   erb :new_assignment
 end
-get '/bursar' do
+get '/admin/bursar' do
   @students = Student.all()
   erb :bursar
 end
-get '/bursar/student/:id/fees' do
+get '/admin/bursar/student/:id/fees' do
   @students = Student.all()
     @student = Student.find(params.fetch('id').to_i)
   erb(:student_fees)
