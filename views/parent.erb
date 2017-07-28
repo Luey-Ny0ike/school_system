@@ -2,8 +2,6 @@
 
 <% if @parent.students.any? %>
 Select the child you want to track
-<% @parent.students.each() do |student| %>
-
 <table>
   <tr>
     <th>Name</th>
@@ -11,6 +9,7 @@ Select the child you want to track
     <th>Stream</th>
   </tr>
   <tr>
+<% @parent.students.each() do |student| %>
     <td>
       <a href="/student/<%= student.id%>">
         <p><%= student.name%></p>
