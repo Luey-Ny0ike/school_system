@@ -264,7 +264,7 @@ post '/fees' do
   student_id = params.fetch("student_id").to_i()
   due_date = params.fetch("due_date")
   @fees = Fee.create(student_id: student_id, due_date:due_date, amount_paid: amount_paid)
-  redirect '/students/'.concat(student_id.to_s)
+  redirect '/student/'.concat(student_id.to_s)
 end
 
 # FOR GRADES

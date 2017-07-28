@@ -1,12 +1,14 @@
-<h1>Student Fees</h1>
- <%= @student.id %>
-<form action="/fees" method="post">
+
+<body style="text-align:center">
+  <h3>Payment for <%= @student.name %></h3>
+<form action="/fees" method="post" class = "form-inline">
   <input id='student_id' name='student_id' type='hidden' value="<%= @student.id() %>">
   <label for="amount_paid">Paid:</label>
-  <input id="amount_paid" name="amount_paid" type="number">
+  <input id="amount_paid" name="amount_paid" type="number" class="form-control">
 
   <label for="due_date">Date:</label>
-  <input id="due_date" name="due_date" type="date">
+  <input id="due_date" name="due_date" type="date" class="form-control">
 
-  <button type="submit">Pay</button>
+  <button type="submit" class="btn btn-default">Pay</button>
 </form>
+</body>

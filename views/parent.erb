@@ -1,20 +1,26 @@
 <h1><%= @parent.name() %></h1>
 
-<%= @parent.name() %>
-   <% if @parent.students.any? %>
-   <h3>Students Available for <%= @parent.name() %>:</h3>
-   <ul>
-     <% @parent.students.each() do |student| %>
-     <a href="/student/<%= student.id%>">
-       <li><%= student.name%></li>
-     <% end %>
-   </ul>
-   <% else %>
-   <p>No student belonging to this parent</p>
-   <br>
-   <% end %>
+<% if @parent.students.any? %>
+Select the child you want to track
+<% @parent.students.each() do |student| %>
 
-<button class="btn"<a href='/parents/<%= @parent.id() %>/edit'>Update Parent Details</a></button>
- </ul>
-
-<li><a href='/'>Go Home</a></li>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Level</th>
+    <th>Stream</th>
+  </tr>
+  <tr>
+    <td>
+      <a href="/student/<%= student.id%>">
+        <p><%= student.name%></p>
+      </td>
+      <td><%= student.level%></td>
+      <td><%= student.stream%></td>
+    </tr>
+  </table>
+    <% end %>
+<% else %>
+<p>No student belonging to this parent</p>
+<br>
+<% end %>
