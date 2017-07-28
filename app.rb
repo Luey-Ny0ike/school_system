@@ -203,7 +203,7 @@ post '/students/:id/assignment/:assignment_id' do
   @assignment_id = params.fetch('assignment_id').to_i
   content = params.fetch('content')
   Track.create(student_id: @student_id, assignment_id: @assignment_id, editing: FALSE, revision: FALSE, approved: FALSE, rejected: FALSE, content: content, under_review: TRUE)
-  redirect '/students/'.concat(@student_id.to_s)
+  redirect '/student/'.concat(@student_id.to_s)
 end
 
 # show teachers
