@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20170727181627) do
     t.integer "level"
     t.string "stream"
     t.string "subject"
-    t.integer "teacher_id"
     t.string "content"
     t.datetime "due_date"
     t.datetime "created_at", null: false
