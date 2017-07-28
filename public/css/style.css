@@ -1,17 +1,37 @@
 .login_form_parent {
   display: none;
-  margin-top: 20%;
-  text-align: left;
+  margin-left: 37%
 }
 .login_form_admin{
   display: none;
-    margin-top: 20%;
-    text-align: right;
+    margin-left: 37%
+}
+#login_form_admin{
+  font-size: 30px
+}
+#login_form_parent{
+  font-size: 30px
 }
 .buttons {
   text-align: center;
-  margin-top: 10%
+  margin-top: 2%
 }
 .login_form{
   text-align: center;
+}
+.example5 .navbar-brand {
+  display: flex;
+  align-items: center;
+}
+.example5 .navbar-brand>img {
+  padding: 7px 14px;
+}
+.logo {
+  margin-left: 37%
+}
+.page{
+  margin-top: 10%
+}
+#search_form{
+  align-items: center;
 }
