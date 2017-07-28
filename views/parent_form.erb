@@ -1,17 +1,10 @@
 
-
-<h1>Search For an existing Student by name:</h1>
-
-
-<form action="/students/find/" method="get">
+<body>
+<form action="/students/find/" method="get" class = 'form-inline' style="text-align:center">
+    <h2>Search Student</h2>
   <div class="row">
-    <div class="col-md-5">
     <label for="name">Name:</label>
     <input id="name" name="name" type="text" required class="form-control">
-  </div>
-</div>
-<br>
-    <button type="submit">Search</button>
+    <button type="submit" class="btn btn-info">Search</button>
 </form>
-
-<li><a href='/'>Home</a></li>
+</body>
