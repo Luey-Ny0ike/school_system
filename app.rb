@@ -57,8 +57,7 @@ get '/student/:id' do
   @grades = Grade.all
   @parent_details = Parent.joins(:associations).where(associations: { student_id: @student_details.id })
   @fees = Fee.all()
-  @assignments=Assignment.joins(:tracks).where(tracks:{student_id: params.fetch('id').to_i})
-  # @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
+@assignments=Assignment.where(level: @student_details.level,stream:@student_details.stream)  # @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
     @perfomances = Grade.joins(:perfomances).where(perfomances:{student_id: params.fetch('id').to_i})
   erb :student_detail
 end
@@ -68,7 +67,8 @@ get '/admin/student/:id' do
   @students = Student.all
   @grades = Grade.all
   @parent_details = Parent.joins(:associations).where(associations: { student_id: @student_details.id })
-  @assignments=Assignment.joins(:tracks).where(tracks:{student_id: params.fetch('id').to_i})
+  #@assignments=Assignment.joins(:tracks).where(tracks:{student_id: params.fetch('id').to_i})
+  @assignments=Assignment.where(level: @student_details.level,stream:@student_details.stream)
   # @assignments = Assignment.student_assignment(@student_details.level.to_i, @student_details.stream)
     @perfomances = Grade.joins(:perfomances).where(perfomances:{student_id: params.fetch('id').to_i})
   erb :admin_student_detail

@@ -5,12 +5,14 @@
 
 .login_form_admin {
   display: none;
-    margin-left: 37%
+  margin-left: 37%
 }
-#login_form_admin{
+
+#login_form_admin {
   font-size: 30px
 }
-#login_form_parent{
+
+#login_form_parent {
   font-size: 30px
 }
 
@@ -22,20 +24,25 @@
 .login_form {
   text-align: center;
 }
+
 .example5 .navbar-brand {
   display: flex;
   align-items: center;
 }
+
 .example5 .navbar-brand>img {
   padding: 7px 14px;
 }
+
 .logo {
   margin-left: 37%
 }
-.page{
+
+.page {
   margin-top: 10%
 }
-#search_form{
+
+#search_form {
   align-items: center;
 }
 #newParent{
