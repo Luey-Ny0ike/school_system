@@ -21,7 +21,7 @@ get('/') do
   erb(:index)
 end
 
-get '/students' do
+get '/admin/students' do
   @students = Student.all
   erb :students
 end
@@ -48,7 +48,7 @@ post '/admin/student/new' do
   password = params[:password]
   @new_parent = Parent.create(name: name, phone: phone, email: email, username: username, password: password)
   Association.create(student_id: @new_student.id, parent_id: @new_parent.id)
-  redirect '/students'
+  redirect '/admin/students'
 end
 
 get '/student/:id' do
